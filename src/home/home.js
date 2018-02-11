@@ -1,0 +1,16 @@
+import React, { Component } from 'react';
+import "./home.css"
+
+class HomeScreen extends Component {
+
+    render() {
+        return(
+            <div className="home-root">
+                <h1 className="home-title">Matcha</h1>
+                <p>Realtime UI designs on as many devices as you want.</p>
+            </div>
+        )
+    }
+}
+
+export default HomeScreen;
