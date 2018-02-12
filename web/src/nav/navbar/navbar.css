@@ -1,0 +1,20 @@
+.navbar-link-text {
+    font-weight: 200;
+    color: white;
+}
+.navbar-link-box {
+    padding-left: 12px;
+    padding-right: 12px;
+    display: inline-block;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-right: .5px #fdfdfd solid;
+    cursor: pointer;
+}
+
+.navbar-root {
+    background: #44af3c;
+    box-shadow: 1px 1px 5px #808080;
+    font-family: "Roboto", sans-serif;
+    margin-bottom:15px
+}

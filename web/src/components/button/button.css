@@ -1,0 +1,32 @@
+.btn {
+    background: white none;
+    padding: 10px 15px;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    border: 0.5px solid grey;
+    border-radius: 3px;
+    outline: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+.btn:hover {
+    transition: 0.2s;
+    box-shadow: 0 1px 3px  grey;
+}
+
+.default {
+}
+
+.success {
+    color: #41cb56;
+    border-color: #41cb56;
+}
+
+.danger {
+    color: #eb4747;
+    border-color: #eb4747;
+}
+
+.cancel {
+    background: #e2e2e2;
+}

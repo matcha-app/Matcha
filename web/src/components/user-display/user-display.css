@@ -1,0 +1,43 @@
+.user-display-root {
+    background: #616161;
+    color:white;
+    position: relative;
+    display: inline-block;
+    height:40px;
+    -webkit-box-shadow: 1px 1px 2px grey;
+    -moz-box-shadow: 1px 1px 2px grey;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.user-display-img {
+    display: inline-block;
+    height:100%;
+    vertical-align: top;
+}
+
+.user-display-info-root {
+    display: inline-block;
+    margin:0;
+    margin-left: 16px;
+    margin-right:16px;
+}
+
+.user-display-info-item {
+    padding:0;
+    margin:0;
+    margin-top: 5px;
+}
+
+.sign-out-button {
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: right;
+    bottom:5px;
+    position: absolute;
+    right:15px;
+    font-size: 10px;
+}
+
+.sign-out-button:hover {
+    font-weight: bold;
+}

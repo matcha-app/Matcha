@@ -1,0 +1,13 @@
+.App {
+    text-align: left;
+    margin-left: 25%;
+    margin-right: 25%;
+    font-family: Roboto, sans-serif;
+}
+
+.app-screen {
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+}
