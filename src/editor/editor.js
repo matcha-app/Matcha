@@ -21,13 +21,16 @@ const firebaseUIConfig = {
 
 class EditorScreen extends Component {
     static ACTIVE_EDITOR_CONTENT_KEY = "activeEditorContent";
+    editorContentRef = null;
+
     constructor() {
         super();
         this.state = {
             signedIn: false,
             user: null,
             googleAccessToken: null,
-            editorContent:""
+            editorContent:"",
+            editorInitialContent: undefined
         };
 
         this.setAuthStateListener();
@@ -45,11 +48,24 @@ class EditorScreen extends Component {
         });
     }
 
+    onSignIn(user) {
+        this.editorContentRef = firebase.database().ref("users/" + this.state.user.uid + "/" + EditorScreen.ACTIVE_EDITOR_CONTENT_KEY);
+
+        setTimeout(() => {
+            this.editorContentRef.once('value').then(snapshot => {
+                let initialContent = "";
+                if (snapshot.val() !== null) {
+                    initialContent = snapshot.val()
+                }
+                this.setState({editorInitialContent: initialContent});
+            })
+        }, 1000);
+    }
+
     syncEditorcontent() {
         console.log(this.state.user);
-        firebase.database().ref("users/" + this.state.user.uid + "/" + EditorScreen.ACTIVE_EDITOR_CONTENT_KEY).set(this.state.editorContent)
+        this.editorContentRef.set(this.state.editorContent)
     };
-
 
     renderSignedInContent() {
         return (
@@ -73,7 +89,9 @@ class EditorScreen extends Component {
                         Update
                     </span>
                 </Button>
-                <EditorBox onChange={this.onEditorContentChanged}/>
+                <EditorBox
+                    initialValue={this.state.editorInitialContent}
+                    onChange={this.onEditorContentChanged}/>
             </div>
         );
     }
@@ -110,6 +128,7 @@ class EditorScreen extends Component {
             </div>
         );
     }
+
     render () {
         let content = null;
         if (this.state.signedIn) {
@@ -133,6 +152,9 @@ class EditorScreen extends Component {
                     user: user
                 }
             );
+            if (user) {
+                editorContext.onSignIn(user);
+            }
         });
     }
 }
