@@ -9,7 +9,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-firebaseui": "^1.1.6",
-    "react-highlight": "^0.10.0"
+    "react-highlight": "^0.10.0",
+    "react-router-dom": "^4.2.0"
   },
   "devDependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.1.1",
