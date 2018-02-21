@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
 import "./navbar.css";
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 class NavigationBar extends Component {
+
+    static propTypes = {
+        screen: PropTypes.array,
+    };
+    static defaultProps = {
+        screens:[],
+    };
+
     render() {
         let screenList = [];
 
         for (let i = 0; i < this.props.screens.length; ++i) {
             let screen = this.props.screens[i];
             screenList.push(
-                <span className="navbar-link-box"
-                      key={screen.name}
-                      onClick={() => {this.onScreenSelect(i)}}>
-                    <span className="navbar-link-text">
-                        {screen.name}
-                    </span>
+                <Link to={screen.path}
+                      key={screen.name}>
+                    <span className="navbar-link-box">
+                        <span className="navbar-link-text">
+                            {screen.name}
+                        </span>
                 </span>
+                </Link>
             );
         }
 
@@ -32,10 +43,16 @@ class NavigationBar extends Component {
 NavigationBar.Screen = class {
     name = "";
     view = null;
+    path = "";
 
-    constructor (name, component) {
+    constructor (name, component, path) {
         this.name = name;
         this.view = component;
+        if (path === undefined) {
+            this.path = '\/' + encodeURIComponent(this.name.toLowerCase());
+        } else {
+            this.path = path;
+        }
     }
 
 };
