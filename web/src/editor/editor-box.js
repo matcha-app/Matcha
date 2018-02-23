@@ -9,6 +9,7 @@ class EditorBox extends Component {
         };
         this.onInput = this.onInput.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -46,6 +47,7 @@ class EditorBox extends Component {
                     <progress
                         style={{width:"100%"}}/>
                 </div>
+
                 <textarea
                     value={this.state.content}
                     onChange={this.onInput}

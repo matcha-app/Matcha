@@ -10,6 +10,8 @@ import EditorScreen from "./editor/editor";
 import NavigationBar from './nav/navbar/navbar'
 import * as firebase from "firebase";
 
+import MatchaLogo from "./components/matcha-logo/matcha-logo";
+
 class App extends Component {
     screens = [];
 
@@ -42,6 +44,8 @@ class App extends Component {
         });
         return (
             <div className="App">
+                <MatchaLogo/>
+
                 <NavigationBar
                     screens={this.screens}
                     onScreenSelect={this.onScreenSelect}
