@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private static final String TAG = "MAIN_ACTIVITY";
+    private static final String TAG = LoginActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null){
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
+                onSignInSuccessful(firebaseAuth);
             }
         };
 
@@ -76,10 +74,14 @@ public class LoginActivity extends AppCompatActivity {
         //updateUI(account);
     }
 
+    protected void onSignInSuccessful(@NonNull FirebaseAuth firebaseAuth) {
+        if (firebaseAuth.getCurrentUser() != null){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }
+    }
     @Override
     protected void onStart(){
         super.onStart();
-
         mAuth.addAuthStateListener(mAuthListener);
     }
 
@@ -96,8 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                //Log.w(TAG, "Google sign in failed", e);
-                // ...
+                Log.w(TAG, "Google sign in failed", e);
             }
         }
     }
@@ -113,8 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
+                            onSignInSuccessful(mAuth);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
