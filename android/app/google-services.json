@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "161299976395",
+    "firebase_url": "https://matcha-80065.firebaseio.com",
+    "project_id": "matcha-80065",
+    "storage_bucket": "matcha-80065.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161299976395:android:c9aec07121db18cd",
+        "android_client_info": {
+          "package_name": "com.patzhum.matcha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161299976395-nqmo2t2hbtjlddr0lb375o36vfs3734i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.patzhum.matcha",
+            "certificate_hash": "9595ac6e0d144eb0467e3f03a92c7e87aa727d76"
+          }
+        },
+        {
+          "client_id": "161299976395-vphumr0tiibsfl70ui4gs8frvv1va0pl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBmpblhheGagA_MQ_2wmiad2jrjSu3r5o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161299976395-vphumr0tiibsfl70ui4gs8frvv1va0pl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
