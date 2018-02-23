@@ -45,6 +45,7 @@ class App extends Component {
         return (
             <div className="App">
                 <MatchaLogo/>
+
                 <NavigationBar
                     screens={this.screens}
                     onScreenSelect={this.onScreenSelect}

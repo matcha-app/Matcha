@@ -9,6 +9,7 @@ class EditorBox extends Component {
         };
         this.onInput = this.onInput.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.initialValue !== undefined) {
@@ -20,6 +21,7 @@ class EditorBox extends Component {
     onKeyDown(event) {
         console.log(event.keyCode);
     }
+
     onInput(val) {
         this.setState({content: val});
         this.props.onChange(val);
@@ -34,6 +36,7 @@ class EditorBox extends Component {
                 </div>
                 <div onKeyDown={this.onKeyDown}
                      onInput={() => this.onInput(this.editable.innerHTML)}
+
                      contentEditable={true}
                      className={["editor-box", "fade", renderEditor ? "visible" : "invisible"].join(' ')}
                      ref={(input) => {
