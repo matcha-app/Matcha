@@ -8,6 +8,7 @@ class EditorBox extends Component {
             content: undefined
         };
         this.onInput = this.onInput.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.initialValue !== undefined) {
@@ -15,6 +16,9 @@ class EditorBox extends Component {
                 content: nextProps.initialValue
             })
         }
+    }
+    onKeyDown(event) {
+        console.log(event.keyCode);
     }
     onInput(val) {
         this.setState({content: val});
@@ -28,7 +32,8 @@ class EditorBox extends Component {
                     <progress
                         style={{width:"100%"}}/>
                 </div>
-                <div onInput={() => this.onInput(this.editable.innerHTML)}
+                <div onKeyDown={this.onKeyDown}
+                     onInput={() => this.onInput(this.editable.innerHTML)}
                      contentEditable={true}
                      className={["editor-box", "fade", renderEditor ? "visible" : "invisible"].join(' ')}
                      ref={(input) => {
