@@ -13,4 +13,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="json_render_error_message">Fatal Error: JSON validation failed.</string>
 </resources>
