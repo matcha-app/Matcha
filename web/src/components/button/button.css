@@ -8,23 +8,38 @@
     outline: none;
     font-size: 14px;
     cursor: pointer;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 .btn:hover {
     transition: 0.2s;
-    box-shadow: 0 1px 3px  grey;
+    box-shadow: 0 1px 1px  grey;
+    color: inherit;
+}
+
+.btn:active {
+    outline: none;
+    box-shadow: none;
 }
 
 .default {
 }
 
 .success {
-    color: #41cb56;
-    border-color: #41cb56;
+    color: #41cb56 !important;
+    border-color: #3ec052;
 }
 
 .danger {
-    color: #eb4747;
-    border-color: #eb4747;
+    color: #eb4747 !important;
+    border-color: #da311d;
+}
+
+.warning {
+    color: #ffb61b !important;
+    border-color: #eb9200;
 }
 
 .cancel {

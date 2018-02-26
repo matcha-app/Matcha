@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import "./button.css";
 
 class Button extends Component {
+    static DEFAULT = "default";
+    static SUCCESS = "success";
+    static WARNING = "warning";
+    static DANGER =  "danger";
+    static CANCEL = "cancel";
     static defaultProps = {
         type: "default"
     };

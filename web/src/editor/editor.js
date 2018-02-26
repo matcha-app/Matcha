@@ -6,31 +6,28 @@ import {
 } from '../components'
 import * as firebase from "firebase";
 import EditorBox from './editor-box';
-
-// Configure FirebaseUI.
-const firebaseUIConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    signInSuccessUrl: '/signedIn',
-    // We will display Google and Facebook as auth providers.
-    signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    ]
-};
+import {
+    Col,
+    Row,
+} from 'react-bootstrap';
 
 class EditorScreen extends Component {
     static ACTIVE_EDITOR_CONTENT_KEY = "activeEditorContent";
+    static LOG_TAG = EditorScreen.name;
     editorContentRef = null;
 
     constructor() {
         super();
+        let user = firebase.auth().currentUser;
+        let signedIn = user !== undefined && user !== null;
+
         this.state = {
-            signedIn: false,
-            user: null,
+            signedIn: signedIn,
+            user: user,
             googleAccessToken: null,
             editorContent:"",
-            editorInitialContent: undefined
+            editorInitialContent: undefined,
+            editorUnsaved: false,
         };
 
         this.setAuthStateListener();
@@ -51,20 +48,29 @@ class EditorScreen extends Component {
     onSignIn(user) {
         this.editorContentRef = firebase.database().ref("users/" + this.state.user.uid + "/" + EditorScreen.ACTIVE_EDITOR_CONTENT_KEY);
 
-        setTimeout(() => {
-            this.editorContentRef.once('value').then(snapshot => {
-                let initialContent = "";
-                if (snapshot.val() !== null) {
-                    initialContent = snapshot.val()
+        this.editorContentRef.once('value').then(snapshot => {
+            let initialContent = "";
+            if (snapshot.val() !== null) {
+                initialContent = snapshot.val()
+            }
+            this.setState(
+                {
+                    editorInitialContent: initialContent,
+                    editorContent: initialContent
                 }
-                this.setState({editorInitialContent: initialContent});
-            })
-        }, 1000);
+            );
+        })
     }
 
     syncEditorcontent() {
-        console.log(this.state.user);
         this.editorContentRef.set(this.state.editorContent)
+            .then(() => {
+                this.setState({editorUnsaved: false});
+                console.log(EditorScreen.LOG_TAG, "Saved editor content.");
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     };
 
     renderSignedInContent() {
@@ -73,22 +79,30 @@ class EditorScreen extends Component {
                 <div>
                     <h1 className="inline nopad nomargin">Editor</h1>
                 </div>
+                <Row>
+                    <Col md={6}>
+                        <Button type={this.state.editorUnsaved ? Button.WARNING : Button.SUCCESS }
+                                onClick={this.syncEditorcontent}>
+                            <img
+                                className="noheight"
+                                src={this.state.editorUnsaved ?
+                                    require("../assets/img/ic_play_circle_filled_black_18dp/web/ic_play_circle_filled_orange_18dp_1x.png") :
+                                    require("../assets/img/ic_play_circle_filled_black_18dp/web/ic_play_circle_filled_green_18dp_1x.png")}
+                                alt=""/>
+                            <span style={{verticalAlign:"middle"}}>
+                                Update
+                            </span>
+                        </Button>
+                    </Col>
 
-                <div className="text-right">
-                    <UserDisplay
-                        user={this.state.user}
-                        signOut={this.signOut}/>
-                </div>
+                    <Col md={6} className="text-right">
+                        <UserDisplay
+                            user={this.state.user}
+                            signOut={this.signOut}/>
+                    </Col>
+                </Row>
 
-                <Button type="success"
-                        onClick={this.syncEditorcontent}>
-                    <img
-                        className="noheight"
-                        src={require("../assets/img/ic_play_circle_filled_black_18dp/web/ic_play_circle_filled_black_18dp_1x.png")}/>
-                    <span style={{verticalAlign:"middle"}}>
-                        Update
-                    </span>
-                </Button>
+
                 <EditorBox
                     initialValue={this.state.editorInitialContent}
                     onChange={this.onEditorContentChanged}/>
@@ -97,7 +111,10 @@ class EditorScreen extends Component {
     }
 
     onEditorContentChanged(editorContent) {
-        this.setState({editorContent: editorContent})
+        this.setState({
+            editorContent: editorContent,
+            editorUnsaved: true
+        })
     }
 
     renderLoginContent() {
@@ -110,13 +127,7 @@ class EditorScreen extends Component {
                     user: result.user
                 });
             }).catch(function(error) {
-                // Handle Errors here.
-                let errorCode = error.code;
-                let errorMessage = error.message;
-                // The email of the user's account used.
-                let email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                let credential = error.credential;
+                console.log(EditorScreen.LOG_TAG, error);
             });
         };
         return (

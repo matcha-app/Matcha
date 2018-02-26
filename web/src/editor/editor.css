@@ -2,18 +2,23 @@
     padding-left: 20px;
     padding-right:20px;
     border-left: 0.5px solid #efefef;
+    position: relative;
 }
 
 .editor-box {
     background-color: black;
+    padding: 16px;
     color: white;
     font-family: "Consolas", monospace;
     min-height: 300px;
     outline: none;
     font-size: 12px;
     margin-top: 8px;
-    padding: 16px;
-
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    white-space: pre-wrap;
 }
 
 .sign-in-root {

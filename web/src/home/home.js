@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./home.css"
-import Highlight from 'react-highlight';
 
 class HomeScreen extends Component {
 

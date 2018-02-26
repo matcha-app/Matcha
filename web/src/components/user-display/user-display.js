@@ -5,7 +5,8 @@ class UserDisplay extends Component {
         return (
             <div className="user-display-root">
                 <img className="user-display-img"
-                     src={this.props.user.photoURL}/>
+                     src={this.props.user.photoURL}
+                     alt={this.props.user.displayName}/>
 
                 <div className="user-display-info-root">
                     <p className="user-display-info-item">
