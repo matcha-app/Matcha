@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
-    Route,
-    Redirect
+    Route
 } from 'react-router-dom';
+
+import {
+    Col,
+    Grid
+} from 'react-bootstrap';
 
 import HomeScreen from './home/home';
 import EditorScreen from "./editor/editor";
@@ -44,15 +48,19 @@ class App extends Component {
         });
         return (
             <div className="App">
-                <MatchaLogo/>
+                <Grid>
+                <Col md={12}>
+                    <MatchaLogo/>
 
-                <NavigationBar
-                    screens={this.screens}
-                    onScreenSelect={this.onScreenSelect}
-                />
-                <div className="app-screen">
-                    {routes}
-                </div>
+                    <NavigationBar
+                        screens={this.screens}
+                        onScreenSelect={this.onScreenSelect}
+                    />
+                    <div className="app-screen">
+                        {routes}
+                    </div>
+                </Col>
+                </Grid>
             </div>
         );
     }

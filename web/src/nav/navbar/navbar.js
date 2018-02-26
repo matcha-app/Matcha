@@ -49,7 +49,7 @@ NavigationBar.Screen = class {
         this.name = name;
         this.view = component;
         if (path === undefined) {
-            this.path = '\/' + encodeURIComponent(this.name.toLowerCase());
+            this.path = '/' + encodeURIComponent(this.name.toLowerCase());
         } else {
             this.path = path;
         }

@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.gson.Gson
 import com.patzhum.matcha.render.MatchaTextView
+import com.patzhum.matcha.render.RenderUtil
 
 class MainActivity : AppCompatActivity() {
     private val auth = FirebaseAuth.getInstance()
@@ -42,15 +43,18 @@ class MainActivity : AppCompatActivity() {
 
     fun render(nullableJson : String?) {
         val json = nullableJson ?: "{}"
-
-        val gson = Gson()
-
-        val textViewState = gson.fromJson<MatchaTextView.State>(json, MatchaTextView.State::class.java)
-        val textView = MatchaTextView(this)
-        textView.render(textViewState)
-
         rootLayout = LinearLayout(this)
-        rootLayout.addView(textView)
+
+        val type = when (RenderUtil.getType(json)) {
+            "TextView" -> MatchaTextView::class.java
+            else -> null
+        }
+
+        if (type != null) {
+            val view = RenderUtil.renderView(this, type, json)
+            rootLayout.addView(view)
+        }
+
         setContentView(rootLayout)
     }
 
