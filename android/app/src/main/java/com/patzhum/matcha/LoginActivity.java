@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onSignInSuccessful(@NonNull FirebaseAuth firebaseAuth) {
         if (firebaseAuth.getCurrentUser() != null){
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
         }
     }
     @Override
