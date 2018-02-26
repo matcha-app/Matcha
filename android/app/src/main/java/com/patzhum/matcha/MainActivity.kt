@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.MalformedJsonException
 import android.view.View
+import android.view.ViewGroup
 
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -55,11 +56,20 @@ class MainActivity : AppCompatActivity() {
     }
     fun render(nullableJson : String?) {
         val json = nullableJson ?: "{}"
-        setContentView(LinearLayout(this))
-        rootLayout = LinearLayout(this)
 
-<<<<<<< HEAD
-        var view : View? = null
+        var viewRoot: ViewGroup? = null
+        rootViewId?.let {
+            val contentView = findViewById<ViewGroup>(it)
+            viewRoot = contentView?.parent?.let {
+                it as ViewGroup
+            }
+            viewRoot?.removeView(contentView)
+        }
+        rootLayout = LinearLayout(this)
+        rootLayout.id = View.generateViewId()
+        rootViewId = rootLayout.id
+
+        val view : View?
         try {
              view = when (RenderUtil.getType(json)) {
                 "TextView" -> RenderUtil.renderView(this, MatchaTextView::class.java, json)
@@ -73,30 +83,13 @@ class MainActivity : AppCompatActivity() {
             renderJsonErrorMessage()
             return
         }
-=======
-        var viewRoot: ViewGroup? = null
-        rootViewId?.let {
-            val contentView = findViewById<ViewGroup>(it)
-            viewRoot = contentView?.parent as ViewGroup
-            viewRoot?.removeView(contentView)
-        }
-        rootLayout = LinearLayout(this)
-        rootLayout.id = View.generateViewId()
-        rootViewId = rootLayout.id
-
-        val gson = Gson()
->>>>>>> This fixes a UI issue where new Activities were being created.
 
         if (view != null) {
             rootLayout.addView(view)
         }
 
-<<<<<<< HEAD
-        setContentView(rootLayout)
-=======
         viewRoot?.addView(rootLayout) ?: setContentView(rootLayout)
 
->>>>>>> This fixes a UI issue where new Activities were being created.
     }
 
     fun checkAuth() {
