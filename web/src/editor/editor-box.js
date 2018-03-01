@@ -33,7 +33,9 @@ class EditorBox extends Component {
             let end = this.editor.selectionEnd;
 
             this.editor.value = value.substring(0, start) + "\t" + value.substring(end);
-            this.editor.selectionStart++;
+            this.editor.selectionStart = start + 1;
+            this.editor.selectionEnd = start + 1;
+
             event.preventDefault();
             event.stopPropagation();
         }
