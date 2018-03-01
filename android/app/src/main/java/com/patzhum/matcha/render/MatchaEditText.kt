@@ -15,8 +15,8 @@ class MatchaEditText : MatchaView<EditText, MatchaEditText.State>() {
     override val stateClass = State::class.java
 
     override fun render(view : EditText, state : State) {
+        super.render(view, state)
         view.apply {
-            RenderUtil.renderBaseView(this, state)
             setText(state.text)
             setTextColor(RenderUtil.tryParseColor(state.textColor, currentTextColor))
             textSize = RenderUtil.tryParseFloat(state.textSize, textSize)
@@ -27,6 +27,6 @@ class MatchaEditText : MatchaView<EditText, MatchaEditText.State>() {
             val text : String? = null,
             val textColor: String? = null,
             val textSize: String? = null
-    ) : RenderUtil.ViewState (EditText::class.java.simpleName)
+    ) : MatchaView.State(EditText::class.java.simpleName)
 }
 
