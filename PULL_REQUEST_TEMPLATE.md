@@ -1,4 +1,6 @@
 ### What does this accomplish?
+
+Resolves <issue>
 ...
 
 ### What is the scope of this change?
