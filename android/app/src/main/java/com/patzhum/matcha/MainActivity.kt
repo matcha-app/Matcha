@@ -12,11 +12,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.patzhum.matcha.render.MatchaEditText
-import com.patzhum.matcha.render.MatchaTextView
-import com.patzhum.matcha.render.RenderUtil
+import com.patzhum.matcha.render.text.MatchaEditText
+import com.patzhum.matcha.render.text.MatchaTextView
+import com.patzhum.matcha.render.core.RenderUtil
 
 class MainActivity : AppCompatActivity() {
     private val auth = FirebaseAuth.getInstance()
@@ -69,14 +68,10 @@ class MainActivity : AppCompatActivity() {
         rootLayout.id = View.generateViewId()
         rootViewId = rootLayout.id
 
-        val view : View?
+        var view : View? = null
         try {
-             view = when (RenderUtil.getType(json)) {
-                "TextView" -> RenderUtil.renderView(this, MatchaTextView::class.java, json)
-                "EditText" -> RenderUtil.renderView(this, MatchaEditText::class.java, json)
-                else -> null
-            }
-        } catch (e : MalformedJsonException) {
+            view = RenderUtil.renderView(json, this)
+        } catch (e : android.util.MalformedJsonException) {
             renderJsonErrorMessage()
             return
         } catch (e : JsonSyntaxException) {
