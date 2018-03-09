@@ -1,0 +1,8 @@
+{
+  "type":"view",
+  "layoutWidth":"match_parent",
+  "layoutHeight":"wrap_content",
+  "padding":"100",
+  "paddingTop":"20",
+  "backgroundColor":"#248374"
+}

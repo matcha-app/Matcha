@@ -1,0 +1,41 @@
+{
+  "type": "LinearLayout",
+  "layoutWidth": "match_parent",
+  "layoutHeight": "match_parent",
+  "backgroundColor": "#efefef",
+  "orientation": "vertical",
+  "children": [{
+    "type": "TextView",
+    "text": "Matcha Dynamic Rendering",
+    "textSize": "24",
+    "textAlignment":"viewStart",
+    "paddingHorizontal":"40",
+    "paddingVertical":"40",
+    "textColor":"#ffffff",
+    "backgroundColor":"#0091ea",
+    "layoutWidth": "match_parent",
+    "layoutHeight": "wrap_content",
+    "elevation":"4"
+  },{
+    "type":"LinearLayout",
+    "padding":"20",
+    "backgroundColor":"#efefef",
+    "orientation":"vertical",
+    "children":[ {
+      "type": "TextView",
+      "text": "Look here, now there. These native views are rendered dynamically.",
+      "textSize": "16",
+      "layoutWidth": "match_parent",
+      "layoutHeight": "400",
+      "backgroundColor":"#242893",
+      "padding":"20"
+    }, {
+      "type": "TextView",
+      "padding":"20",
+      "text": "Matcha is dynamic, so when you need to customize your components it's easy. Add some hooks and now you're free to customize them as you see fit.",
+      "textSize": "16",
+      "layoutWidth": "match_parent",
+      "layoutHeight": "wrap_content"
+    }]
+  }]
+}

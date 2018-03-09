@@ -1,0 +1,17 @@
+{
+  "type": "LinearLayout",
+  "orientation": "vertical",
+  "layoutWidth": "match_parent",
+  "layoutHeight": "wrap_content",
+  "padding": "20",
+  "backgroundColor":"blue",
+  "children":[
+    {
+      "type":"TextView",
+      "text":"textview1"
+    },
+    {
+      "type":"TextView",
+      "text":"textview2"
+    }]
+}

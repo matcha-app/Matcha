@@ -28,8 +28,9 @@ yarn-error.log*
 /web/build/
 /web/package-lock.json
 
-# android studio
-/android/.idea/
-/android/.gradle
-/android/local.properties
-/android/captures
+/.idea
+.gradle
+local.properties
+captures
+.idea/
+Matcha.iml
